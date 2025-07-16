@@ -1,6 +1,6 @@
 const steps = [
   {
-    title: "1. Login to CRM",
+    title: "Login to CRM",
     content: `
       <p><strong>URL:</strong> <a href="https://okayacarecrm.com" target="_blank">https://okayacarecrm.com</a></p>
       <ul>
@@ -8,83 +8,118 @@ const steps = [
         <li>Click Login</li>
         <li>Dashboard shows Complaint Login, Product Registration, etc.</li>
       </ul>
-    `
+    `,
+    category: "Login"
   },
   {
-    title: "2. Register New Complaint",
+    title: "Register New Complaint",
     content: `
       <ul>
         <li>Click Complaint Login</li>
         <li>Enter Mobile Number</li>
         <li>If number exists → Details shown, else → Add New Customer</li>
       </ul>
-    `
+    `,
+    category: "Complaint"
   },
   {
-    title: "3. Fill Required Details",
+    title: "Fill Required Details",
     content: `
       <ul>
-        <li>Mobile Number, Customer Name, Address (with Pin), Serial Number</li>
-        <li>Product Name, Date of Purchase, Issue Details</li>
+        <li>Mobile Number, Customer Name, Address, Product Serial</li>
+        <li>Date of Purchase, Product Issue</li>
       </ul>
-    `
+    `,
+    category: "Complaint"
   },
   {
-    title: "4. Warranty Check & Product Registration",
+    title: "Product Registration Process",
     content: `
       <ul>
-        <li>Use serial number to verify product warranty</li>
-        <li>Register via <a href="https://www.okaya.in">Okaya Website</a> > Okaya Care > Warranty Registration</li>
+        <li>Go to: www.okaya.in → Warranty Registration</li>
+        <li>Enter serial number and upload Invoice</li>
       </ul>
-    `
+    `,
+    category: "Registration"
   },
   {
-    title: "5. Escalation Process",
+    title: "Escalation Matrix",
     content: `
       <ul>
-        <li>1st Call: Engineer → 2nd: BSI → 3rd: RM → 4th: Ticket Login</li>
-        <li>Raise TT in CRM under DL/TT tab</li>
+        <li>1st Call: Engineer → 2nd: BSI → 3rd: RM → 4th: Raise TT</li>
+        <li>Follow escalation if no response at each level</li>
       </ul>
-    `
+    `,
+    category: "Escalation"
   },
   {
-    title: "6. Closure & Feedback",
+    title: "Warranty Check",
     content: `
       <ul>
-        <li>Engineer shares feedback code after visit</li>
-        <li>CSAT feedback collected via IVR</li>
-        <li>Customer thanked for their call</li>
+        <li>Use CRM → Enter Serial No. → See Validity</li>
+        <li>Check Paperless rejection reasons</li>
       </ul>
-    `
+    `,
+    category: "Warranty"
+  },
+  {
+    title: "Closure & CSAT Feedback",
+    content: `
+      <ul>
+        <li>Engineer closes ticket</li>
+        <li>Customer receives IVR for CSAT</li>
+        <li>Call center thanks customer</li>
+      </ul>
+    `,
+    category: "Closure"
   }
 ];
 
 let currentStep = 0;
+let filteredSteps = [...steps];
+
 const container = document.getElementById('stepsContainer');
 const searchInput = document.getElementById('searchInput');
+const categorySelect = document.getElementById('categorySelect');
 const prevBtn = document.getElementById('prevBtn');
 const nextBtn = document.getElementById('nextBtn');
 
 function renderStep(index) {
-  const step = steps[index];
+  if (!filteredSteps[index]) {
+    container.innerHTML = "<p>No SOP steps found.</p>";
+    prevBtn.disabled = true;
+    nextBtn.disabled = true;
+    return;
+  }
+
+  const step = filteredSteps[index];
   container.innerHTML = `
     <div class="step-card">
       <h2>${step.title}</h2>
       ${step.content}
     </div>
   `;
+
   prevBtn.disabled = index === 0;
-  nextBtn.disabled = index === steps.length - 1;
+  nextBtn.disabled = index === filteredSteps.length - 1;
 }
 
-searchInput.addEventListener('input', () => {
+function filterSteps() {
+  const category = categorySelect.value;
   const query = searchInput.value.toLowerCase();
-  const matched = steps.find((s, i) => s.title.toLowerCase().includes(query));
-  if (matched) {
-    currentStep = steps.indexOf(matched);
-    renderStep(currentStep);
-  }
-});
+
+  filteredSteps = steps.filter(step => {
+    const matchesCategory = category === "All" || step.category === category;
+    const matchesSearch = step.title.toLowerCase().includes(query);
+    return matchesCategory && matchesSearch;
+  });
+
+  currentStep = 0;
+  renderStep(currentStep);
+}
+
+searchInput.addEventListener('input', filterSteps);
+categorySelect.addEventListener('change', filterSteps);
 
 prevBtn.addEventListener('click', () => {
   if (currentStep > 0) {
@@ -94,10 +129,11 @@ prevBtn.addEventListener('click', () => {
 });
 
 nextBtn.addEventListener('click', () => {
-  if (currentStep < steps.length - 1) {
+  if (currentStep < filteredSteps.length - 1) {
     currentStep++;
     renderStep(currentStep);
   }
 });
 
-renderStep(currentStep);
+// Initial render
+filterSteps();
