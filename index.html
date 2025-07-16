@@ -8,27 +8,35 @@
   <script defer src="script.js"></script>
 </head>
 <body>
-  <header>
-    <h1>📘 Okaya CRM SOP</h1>
-    <div class="controls">
-      <select id="categorySelect">
-        <option value="All">📂 All SOPs</option>
-        <option value="Login">🔐 Login & Dashboard</option>
-        <option value="Complaint">📞 Complaint Handling</option>
-        <option value="Registration">📝 Product Registration</option>
-        <option value="Escalation">🚨 Escalation / TT</option>
-        <option value="Warranty">📦 Warranty Info</option>
-        <option value="Closure">✅ CSAT & Closure</option>
-      </select>
-      <input type="text" id="searchInput" placeholder="🔍 Search...">
-    </div>
-  </header>
+  <nav class="navbar">
+    <div class="logo">📘 Okaya CRM SOP</div>
+    <ul class="nav-links">
+      <li class="dropdown">
+        <a href="#">🔋 Battery</a>
+        <ul class="dropdown-menu">
+          <li><a href="#" onclick="loadCategory('Battery-Complaint')">Complaint Handling</a></li>
+          <li><a href="#" onclick="loadCategory('Battery-Replacement')">Replacement Process</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#">⚡ Inverter</a>
+        <ul class="dropdown-menu">
+          <li><a href="#" onclick="loadCategory('Inverter-Login')">Login</a></li>
+          <li><a href="#" onclick="loadCategory('Inverter-Issues')">Issue Types</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#">💧 Nasaka</a>
+        <ul class="dropdown-menu">
+          <li><a href="#" onclick="loadCategory('Nasaka-Install')">RO Installation</a></li>
+          <li><a href="#" onclick="loadCategory('Nasaka-Escalation')">Escalation</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
 
-  <main id="stepsContainer"></main>
-
-  <footer>
-    <button id="prevBtn">⬅️ Back</button>
-    <button id="nextBtn">Next ➡️</button>
-  </footer>
+  <main id="stepsContainer">
+    <div class="default-message">Select an SOP category from the menu above to begin.</div>
+  </main>
 </body>
 </html>
