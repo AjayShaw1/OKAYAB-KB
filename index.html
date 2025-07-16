@@ -1,42 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Okaya CRM SOP</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="style.css" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Okaya Knowledge Bank</title>
+  <link rel="stylesheet" href="style.css"/>
   <script defer src="script.js"></script>
 </head>
 <body>
-  <nav class="navbar">
-    <div class="logo">📘 Okaya CRM SOP</div>
-    <ul class="nav-links">
-      <li class="dropdown">
-        <a href="#">🔋 Battery</a>
-        <ul class="dropdown-menu">
-          <li><a href="#" onclick="loadCategory('Battery-Complaint')">Complaint Handling</a></li>
-          <li><a href="#" onclick="loadCategory('Battery-Replacement')">Replacement Process</a></li>
-        </ul>
-      </li>
-      <li class="dropdown">
-        <a href="#">⚡ Inverter</a>
-        <ul class="dropdown-menu">
-          <li><a href="#" onclick="loadCategory('Inverter-Login')">Login</a></li>
-          <li><a href="#" onclick="loadCategory('Inverter-Issues')">Issue Types</a></li>
-        </ul>
-      </li>
-      <li class="dropdown">
-        <a href="#">💧 Nasaka</a>
-        <ul class="dropdown-menu">
-          <li><a href="#" onclick="loadCategory('Nasaka-Install')">RO Installation</a></li>
-          <li><a href="#" onclick="loadCategory('Nasaka-Escalation')">Escalation</a></li>
-        </ul>
-      </li>
-    </ul>
-  </nav>
+  <header class="header">
+    <h1>OKAYA Knowledge Bank</h1>
+    <nav class="nav">
+      <a href="#" onclick="loadCategory('Battery')">Battery</a>
+      <a href="#" onclick="loadCategory('Inverter')">Inverter</a>
+      <a href="#" onclick="loadCategory('Nasaka')">Nasaka</a>
+      <a href="#" onclick="loadCategory('Script')">Script</a>
+      <a href="#" onclick="loadCategory('Escalation')">Escalation Matrix</a>
+      <a href="#" onclick="loadCategory('Warranty')">Warranty Information</a>
+      <a href="#" onclick="loadCategory('CRM')">CRM Login</a>
+      <a href="#" onclick="loadCategory('Contact')">Contact</a>
+    </nav>
+    <input type="text" id="searchInput" placeholder="Search...">
+  </header>
 
-  <main id="stepsContainer">
-    <div class="default-message">Select an SOP category from the menu above to begin.</div>
+  <main id="contentArea">
+    <p class="default-msg">Please select a topic from the menu above.</p>
   </main>
+
+  <footer>
+    <button id="prevBtn">⬅ Back</button>
+    <button id="nextBtn">Next ➡</button>
+  </footer>
 </body>
 </html>

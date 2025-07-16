@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Inverter Complaint Handling Flow</title>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+  <style>
+    body { font-family: sans-serif; padding: 20px; background: #f4f4f4; }
+    h1 { text-align: center; }
+    .mermaid { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 8px #ccc; }
+  </style>
+</head>
+<body>
+  <h1>Inverter Complaint Handling Process</h1>
+  <div class="mermaid">
+    graph TD
+      A[Call Login<br>Call Center] --> B[Inverter]
+      B --> C1[Okaya]
+      B --> C2[Microtek]
+      C1 --> D1[Call Assign to Okaya FSE]
+      D1 --> E1[Repair]
+      D1 --> E2[NVC - Cancel]
+      C2 --> D2[Call transfer to Microtek FSE]
+      D2 --> E3[Repair]
+      D2 --> E4[NVC - Cancel]
+      E1 --> F[Call Close]
+      E2 --> F
+      E3 --> F
+      E4 --> F
+  </div>
+</body>
+</html>
