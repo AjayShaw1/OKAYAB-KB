@@ -10,12 +10,21 @@
 <body>
   <header>
     <h1>📘 Okaya CRM SOP</h1>
-    <input type="text" id="searchInput" placeholder="🔍 Search...">
+    <div class="controls">
+      <select id="categorySelect">
+        <option value="All">📂 All SOPs</option>
+        <option value="Login">🔐 Login & Dashboard</option>
+        <option value="Complaint">📞 Complaint Handling</option>
+        <option value="Registration">📝 Product Registration</option>
+        <option value="Escalation">🚨 Escalation / TT</option>
+        <option value="Warranty">📦 Warranty Info</option>
+        <option value="Closure">✅ CSAT & Closure</option>
+      </select>
+      <input type="text" id="searchInput" placeholder="🔍 Search...">
+    </div>
   </header>
 
-  <main id="stepsContainer">
-    <!-- Steps will be injected dynamically -->
-  </main>
+  <main id="stepsContainer"></main>
 
   <footer>
     <button id="prevBtn">⬅️ Back</button>
