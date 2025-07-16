@@ -1,0 +1,10 @@
+.controls {
+  display: flex;
+  gap: 10px;
+}
+
+#categorySelect {
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+}
